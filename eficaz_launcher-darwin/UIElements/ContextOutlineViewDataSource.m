@@ -7,13 +7,20 @@
 //
 
 #import "ContextOutlineViewDataSource.h"
+#import "ContextItem.h"
 
 @implementation ContextOutlineViewDataSource
-static NSArray *datasource;
+static NSMutableArray *datasource;
 
 - (id)init {
     self = [super init];
-    datasource = [NSArray arrayWithObjects:@"Test", @"workable?", @"iDontThinkSo", nil];
+    
+    ContextItem *fakeContextItem = [[ContextItem alloc] init];
+    datasource = [[NSMutableArray alloc] init];
+    [datasource addObject:fakeContextItem];
+    NSLog(@"ADD OBJECT");
+    
+    //datasource = [NSArray arrayWithObjects:@"Test", @"workable?", @"iDontThinkSo", nil];
     return self;
 }
 
@@ -33,8 +40,8 @@ static NSArray *datasource;
     return [datasource count];
 }
 
-- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(ContextItem *)item
 {
-    return item;
+    return [item eficazContextName];
 }
 @end
